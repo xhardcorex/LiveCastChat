@@ -12,6 +12,8 @@ let package = Package(
             targets: ["LiveCastChat"]),
     ],
     dependencies: [
+        .package(url: "https://github.com/AgoraIO-Community/AgoraChat_iOS", from: "1.0.6")
+
         // Dependencies declare other packages that this package depends on.
         // .package(url: /* package url */, from: "1.0.0"),
     ],
