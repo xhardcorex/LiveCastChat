@@ -243,13 +243,13 @@ public extension MessagesDisplayDelegate {
     }
     
     internal func configureAvatarView(_ avatarView: AvatarView, for message: ChatMessageSender, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
-        if let profileImageURL = message.profileImageURL {
-            avatarView.af.setImage(withURL: profileImageURL)
-        } else {
-            DispatchQueue.main.async {
-                avatarView.image = LetterAvatarConfigurator.makeAvatar(with: message.initials)
-            }
-        }
+//        if let profileImageURL = message.profileImageURL {
+//            avatarView.af.setImage(withURL: profileImageURL)
+//        } else {
+//            DispatchQueue.main.async {
+//                avatarView.image = LetterAvatarConfigurator.makeAvatar(with: message.initials)
+//            }
+//        }
     }
 
     func configureAccessoryView(_ accessoryView: UIView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {}
