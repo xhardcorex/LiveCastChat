@@ -418,6 +418,7 @@ open class AutocompleteManager: NSObject, InputPlugin, UITextViewDelegate, UITab
         
         if let session = currentSession {
             let textToReplace = (textView.text as NSString).substring(with: range)
+//FIXME: Investigate this part
 //            let deleteSpaceCount = textToReplace.filter { $0 == .space }.count
 //            let insertSpaceCount = text.filter { $0 == .space }.count
 //            let spaceCountDiff = insertSpaceCount - deleteSpaceCount

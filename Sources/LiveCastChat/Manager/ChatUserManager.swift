@@ -13,8 +13,9 @@ class ChatUserManager {
     static let shared = ChatUserManager()
 
     func updateCurrentUserAvatar() {
-        guard let urlString = UserManager.user.currentUser?.avatar?.presignedUrl else { return }
-        AgoraChatClient.shared().userInfoManager?.updateOwnUserInfo(urlString, with: .avatarURL)
+        //FIXME: Add avatar
+//        guard let urlString = UserManager.user.currentUser?.avatar?.presignedUrl else { return }
+        AgoraChatClient.shared().userInfoManager.updateOwnUserInfo("", with: .avatarURL)
     }
     
 }

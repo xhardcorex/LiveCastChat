@@ -41,7 +41,7 @@ class ChatReactionManager {
     }
 
     func add(with index: Int, to messageId: String, completion: @escaping ReturnAction) {
-        AgoraChatClient.shared().chatManager?.addReaction(reactionsDataset[index].reaction, toMessage: messageId, completion: { error in
+        AgoraChatClient.shared().chatManager.addReaction(reactionsDataset[index].reaction, toMessage: messageId, completion: { error in
             if let error = error {
                 print(error.errorDescription!)
             }
@@ -50,7 +50,7 @@ class ChatReactionManager {
     }
 
     func remove(with index: Int, to messageId: String, completion: @escaping ReturnAction) {
-        AgoraChatClient.shared().chatManager?.removeReaction(reactionsDataset[index].reaction, fromMessage: messageId, completion: { error in
+        AgoraChatClient.shared().chatManager.removeReaction(reactionsDataset[index].reaction, fromMessage: messageId, completion: { error in
             if let error = error {
                 print(error.errorDescription!)
             }
@@ -59,7 +59,7 @@ class ChatReactionManager {
     }
 
     func fetchReactions(messageIds: [String], completion: @escaping ReturnAction) {
-        AgoraChatClient.shared().chatManager?.getReactionList(messageIds, groupId: nil, chatType: .chat, completion: { reactions, error in
+        AgoraChatClient.shared().chatManager.getReactionList(messageIds, groupId: nil, chatType: .chat, completion: { reactions, error in
             if error == nil {
                 self.reactions = reactions
             } else {
@@ -70,7 +70,7 @@ class ChatReactionManager {
     }
 
     func fetchReactionDetails(messageId: String, reaction: String) {
-        AgoraChatClient.shared().chatManager?.getReactionDetail(messageId, reaction: reaction, cursor: nil, pageSize: 30, completion: { agoraReaction, value, error in
+        AgoraChatClient.shared().chatManager.getReactionDetail(messageId, reaction: reaction, cursor: nil, pageSize: 30, completion: { agoraReaction, value, error in
             if let error = error {
                 print(error)
             }

@@ -19,7 +19,8 @@ let package = Package(
     targets: [
         .target(
             name: "LiveCastChat",
-            dependencies: []),
+            dependencies: [.product(name: "AgoraChat", package: "AgoraChat_iOS")],
+            path: "Sources"),
         .testTarget(
             name: "LiveCastChatTests",
             dependencies: ["LiveCastChat"]),
