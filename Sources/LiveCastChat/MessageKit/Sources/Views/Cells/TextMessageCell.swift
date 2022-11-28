@@ -108,7 +108,7 @@ open class TextMessageCell: MessageContentCell {
 
         var string = ""
         for reaction in reactions {
-            string.append(ChatReactionManager.shared.reactionsDataset.first(where: { $0.reaction == reaction })?.imageName ?? "-")
+//            string.append(ChatReactionManager.shared.reactionsDataset.first(where: { $0.reaction == reaction })?.imageName ?? "-")
         }
         reactionsLabel?.text = string
         contentView.addSubview(reactionsLabel!)

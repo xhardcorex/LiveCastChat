@@ -49,7 +49,7 @@ class GIfInputBarAccessoryView: InputBarAccessoryView {
     private var shouldCallMoreEventInsteadOfSend = false {
         didSet {
             if self.shouldCallMoreEventInsteadOfSend {
-                self.sendButton.image = Images.threeHorizontalDots
+//                self.sendButton.image = Images.threeHorizontalDots
             } else {
                 let config = UIImage.SymbolConfiguration(textStyle: .largeTitle)
                 self.sendButton.image = UIImage(systemName: "arrow.up.circle.fill", withConfiguration: config)
@@ -81,7 +81,7 @@ class GIfInputBarAccessoryView: InputBarAccessoryView {
                 $0.spacing = .fixed(5)
                 $0.translatesAutoresizingMaskIntoConstraints = false
                 
-                $0.image = Images.gif
+//                $0.image = Images.gif
                 $0.tintColor = .accentColor
                 
                 $0.setSize(CGSize(width: 30, height: 30), animated: false)
@@ -101,8 +101,8 @@ class GIfInputBarAccessoryView: InputBarAccessoryView {
                 $0.spacing = .fixed(5)
                 $0.translatesAutoresizingMaskIntoConstraints = false
                 
-                $0.image = Images.gif
-                $0.tintColor = .accentColor
+//                $0.image = Images.gif
+//                $0.tintColor = .accentColor
                 
                 $0.setSize(CGSize(width: 30, height: 30), animated: false)
             }.onSelected {
