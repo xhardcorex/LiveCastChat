@@ -9,7 +9,7 @@ import UIKit
 import AgoraChat
 import ProgressHUD
 
-class ChatMembersViewController: UIViewController, IAlertHelper {
+open class ChatMembersViewController: UIViewController, IAlertHelper {
     
     // MARK: - IBOutlets
     
@@ -20,22 +20,22 @@ class ChatMembersViewController: UIViewController, IAlertHelper {
     var chatMembers: [RoomMember]?
     var mutedMembersUsernames: [String] = []
     
-    override func viewDidLoad() {
+    open override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
         fetchData()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
+    open override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
-    override func viewDidAppear(_ animated: Bool) {
+    open override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
+    open override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
     }
     
@@ -76,7 +76,7 @@ class ChatMembersViewController: UIViewController, IAlertHelper {
         guard let chatId = chatId else { return }
 
         AgoraChatClient.shared().roomManager.getChatroomMuteListFromServer(withId: chatId, pageNumber: 0, pageSize: 20) { agoraResult, agoraChatError in
-            if let mutedUserNames = agoraResult as? [String] {
+            if let mutedUserNames = agoraResult {
                 self.mutedMembersUsernames.append(contentsOf: mutedUserNames)
                 self.tableView.reloadData()
                 ProgressHUD.dismiss()
@@ -133,15 +133,15 @@ class ChatMembersViewController: UIViewController, IAlertHelper {
 
 extension ChatMembersViewController: UITableViewDataSource, UITableViewDelegate {
     
-    func numberOfSections(in tableView: UITableView) -> Int {
+    public func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return chatMembers?.count ?? 0
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ChatMemberCell.identifier, for: indexPath) as! ChatMemberCell
         guard let member = chatMembers?[indexPath.row] else { return cell }
         let isMutedMember = mutedMembersUsernames.contains(member.username)
@@ -156,7 +156,7 @@ extension ChatMembersViewController: UITableViewDataSource, UITableViewDelegate 
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
     }
     

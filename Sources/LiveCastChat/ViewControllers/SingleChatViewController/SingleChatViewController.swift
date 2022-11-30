@@ -136,7 +136,7 @@ open class SingleChatViewController: MessagesViewController, IAlertHelper {
     
     // MARK: - Init
     
-    init(userId: String, roomName: String, chatUserInfo: AgoraChatUserInfo? = nil, chatMessages: [ChatMessage] = []) {
+    public init(userId: String, roomName: String, chatUserInfo: AgoraChatUserInfo? = nil, chatMessages: [ChatMessage] = []) {
 
         self.conversation = (AgoraChatClient.shared().chatManager.getConversation(userId, type: .chat, createIfNotExist: true))!
 
