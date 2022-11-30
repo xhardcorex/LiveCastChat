@@ -30,7 +30,8 @@ let package = Package(
                            .product(name: "GiphyUISDK", package: "giphy-ios-sdk"),
                            .product(name: "ProgressHUD", package: "ProgressHUD"),
                            .product(name: "ReactionButton", package: "ReactionButton")],
-            path: "Sources"),
+            path: "Sources",
+            resources: [.process("Resource")]),
         .testTarget(
             name: "LiveCastChatTests",
             dependencies: ["LiveCastChat"]),
