@@ -14,7 +14,7 @@ protocol ChatViewControllerDelegate: AnyObject {
     func didUpdateLastMessage(with message: ChatMessage, avatarUrl: URL?)
 }
 
-class ChatViewController: MessagesViewController, IAlertHelper {
+open class ChatViewController: MessagesViewController, IAlertHelper {
     
     // MARK: - UI
     
@@ -53,7 +53,7 @@ class ChatViewController: MessagesViewController, IAlertHelper {
         return control
     }()
     
-    override var messagesCollectionView: MessagesCollectionView {
+    open override var messagesCollectionView: MessagesCollectionView {
          get {
              return lazyMessagesCollectionView
          }
@@ -90,7 +90,7 @@ class ChatViewController: MessagesViewController, IAlertHelper {
     
     // MARK: - View Controller life cycle
     
-    override func viewDidLoad() {
+    open override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
         if let chatInitError = chatInitError {
@@ -98,7 +98,7 @@ class ChatViewController: MessagesViewController, IAlertHelper {
         }
     }
     
-    override func viewWillAppear(_ animated: Bool) {
+    open override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         //FIXME: Setup IQKeyboardManager
         //IQKeyboardManager.shared.enable = false
@@ -106,13 +106,13 @@ class ChatViewController: MessagesViewController, IAlertHelper {
      
     }
     
-    override func viewDidAppear(_ animated: Bool) {
+    open override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         addKeyboardListeners()
         messagesCollectionView.scrollToLastItem()
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
+    open override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         //IQKeyboardManager.shared.enable = true
         self.navigationController?.setNavigationBarHidden(true, animated: true)
@@ -157,7 +157,7 @@ class ChatViewController: MessagesViewController, IAlertHelper {
         fatalError()
     }
     
-    required init?(coder: NSCoder) {
+    required public init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
@@ -374,20 +374,20 @@ extension ChatViewController: Darkable {
 // MARK: - MessagesDataSource
 extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, MessagesDisplayDelegate {
     
-    func currentSender() -> SenderType {
+    public func currentSender() -> SenderType {
         return sender
     }
     
-    func messageForItem(at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> MessageType {
+    public func messageForItem(at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> MessageType {
         let message = messages[indexPath.section]
         return message
     }
     
-    func numberOfSections(in messagesCollectionView: MessagesCollectionView) -> Int {
+    public func numberOfSections(in messagesCollectionView: MessagesCollectionView) -> Int {
         return messages.count
     }
     
-    func messageTopLabelAttributedText(for message: MessageType, at indexPath: IndexPath) -> NSAttributedString? {
+    public func messageTopLabelAttributedText(for message: MessageType, at indexPath: IndexPath) -> NSAttributedString? {
         guard let message = message as? ChatMessage else {
             assertionFailure()
             return nil
@@ -409,16 +409,16 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
         return attrString
     }
     
-    func messageTopLabelHeight(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> CGFloat {
+    public func messageTopLabelHeight(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> CGFloat {
         guard !shouldHideTimeAndSender(at: indexPath) else { return 0 }
         return 15
     }
     
-    func backgroundColor(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> UIColor {
+    public func backgroundColor(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> UIColor {
         return .clear
     }
     
-    func configureAvatarView(_ avatarView: AvatarView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
+    public func configureAvatarView(_ avatarView: AvatarView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
         
         avatarView.image = nil
         guard shouldShowAvatar(at: indexPath) else {
@@ -532,7 +532,7 @@ extension ChatViewController {
 
 // MARK: - InputBarAccessoryViewDelegate
 extension ChatViewController: InputBarAccessoryViewDelegate {
-    func inputBar(_ inputBar: InputBarAccessoryView, didPressSendButtonWith text: String) {
+    public func inputBar(_ inputBar: InputBarAccessoryView, didPressSendButtonWith text: String) {
         let components = inputBar.inputTextView.components
         inputBar.inputTextView.text = String()
         inputBar.invalidatePlugins()
@@ -601,7 +601,7 @@ extension ChatViewController: GIfInputBarAccessoryViewDelegate {
 
 // MARK: - GiphyDelegate
 extension ChatViewController: GiphyDelegate {
-    func didSelectMedia(giphyViewController: GiphyViewController, media: GPHMedia) {
+    public func didSelectMedia(giphyViewController: GiphyViewController, media: GPHMedia) {
         
         let gifURL = media.url(rendition: .fixedWidth, fileType: .gif)
         let gifExtension = GifAttachment(gifUrl: gifURL?.description ?? "-",
@@ -641,7 +641,7 @@ extension ChatViewController: GiphyDelegate {
         }
     }
    
-   func didDismiss(controller: GiphyViewController?) {
+    public func didDismiss(controller: GiphyViewController?) {
         // your user dismissed the controller without selecting a GIF.
    }
     
