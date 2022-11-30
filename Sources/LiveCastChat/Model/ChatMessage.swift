@@ -17,10 +17,10 @@ public struct ChatMessage: Codable, Equatable {
     // MARK: Private Constant
     
     // MARK: Variable
-    var sender: SenderType = ChatMessageSender()
-    var messageId: String = ""
-    var sentDate: Date = Date()
-    var kind: MessageKind = .attributedText(NSAttributedString(string: ""))
+    public var sender: SenderType = ChatMessageSender()
+    public var messageId: String = ""
+    public var sentDate: Date = Date()
+    public var kind: MessageKind = .attributedText(NSAttributedString(string: ""))
     var text: String = ""
     var gifExtension: GifAttachment?
     
@@ -124,4 +124,9 @@ public struct ChatMessage: Codable, Equatable {
     public static func == (lhs: ChatMessage, rhs: ChatMessage) -> Bool {
         return lhs.messageId == rhs.messageId
     }
+}
+
+// MARK: - MessageType
+extension ChatMessage: MessageType {
+
 }
