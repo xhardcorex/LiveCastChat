@@ -10,7 +10,7 @@ import AgoraChat
 import AlamofireImage
 import GiphyUISDK
 
-protocol ChatViewControllerDelegate: AnyObject {
+public protocol ChatViewControllerDelegate: AnyObject {
     func didUpdateLastMessage(with message: ChatMessage, avatarUrl: URL?)
 }
 
