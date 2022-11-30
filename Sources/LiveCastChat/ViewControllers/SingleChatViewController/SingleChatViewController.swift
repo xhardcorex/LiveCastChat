@@ -140,7 +140,7 @@ open class SingleChatViewController: MessagesViewController, IAlertHelper {
 
         self.conversation = (AgoraChatClient.shared().chatManager.getConversation(userId, type: .chat, createIfNotExist: true))!
 
-        super.init(nibName: "SingleChatViewController", bundle: Bundle(for: type(of: self)))
+        super.init(nibName: "SingleChatViewController", bundle: Bundle.module)
 
         self.roomName = roomName
         self.messages = chatMessages
