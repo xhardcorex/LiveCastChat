@@ -5,10 +5,10 @@
 //  Created by Nik on 30.11.2022.
 //
 
-import Foundation
+import UIKit
 
 open class ChatControllerCreator {
     public static func chatListController() -> ChatListViewController {
-        return ChatListViewController.instantiate(from: .chat)
+        return UIStoryboard(name: "Chat", bundle: nil).instantiateViewController(withIdentifier: "ChatListViewController") as! ChatListViewController //ChatListViewController.instantiate(from: .chat)
     }
 }
