@@ -10,7 +10,7 @@ import AgoraChat
 import ProgressHUD
 //import EmptyStateKit
 
-class ChatListViewController: UIViewController {
+open class ChatListViewController: UIViewController {
 
     // MARK: - IBOutlets
     
@@ -19,7 +19,7 @@ class ChatListViewController: UIViewController {
     var presence: [AgoraChatPresence] = []
     var users: [AgoraChatUserInfo] = []
     
-    override func viewDidLoad() {
+    open override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
         fetchConversations()
@@ -90,15 +90,15 @@ class ChatListViewController: UIViewController {
 
 extension ChatListViewController: UITableViewDataSource, UITableViewDelegate {
     
-    func numberOfSections(in tableView: UITableView) -> Int {
+    public func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return chats.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ChatListCell.identifier, for: indexPath) as! ChatListCell
         let chat = chats[indexPath.row]
         let status = presence.first(where: { $0.publisher == chat.conversationId })?.statusDetails?.first?.status ?? 0
@@ -108,7 +108,7 @@ extension ChatListViewController: UITableViewDataSource, UITableViewDelegate {
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let chat = chats[indexPath.row]
         let userInfo = users[indexPath.row]
