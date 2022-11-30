@@ -15,7 +15,7 @@ import ProgressHUD
 import AVKit
 import ReactionButton
 
-class SingleChatViewController: MessagesViewController, IAlertHelper {
+open class SingleChatViewController: MessagesViewController, IAlertHelper {
     
     // MARK: - UI
     
@@ -64,7 +64,7 @@ class SingleChatViewController: MessagesViewController, IAlertHelper {
         return control
     }()
     
-    override var messagesCollectionView: MessagesCollectionView {
+    open override var messagesCollectionView: MessagesCollectionView {
          get {
              return lazyMessagesCollectionView
          }
@@ -107,7 +107,7 @@ class SingleChatViewController: MessagesViewController, IAlertHelper {
     
     // MARK: - View Controller life cycle
     
-    override func viewDidLoad() {
+    open override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
         if let chatInitError = chatInitError {
@@ -115,20 +115,20 @@ class SingleChatViewController: MessagesViewController, IAlertHelper {
         }
     }
     
-    override func viewWillAppear(_ animated: Bool) {
+    open override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         //IQKeyboardManager.shared.enable = false
         self.navigationController?.setNavigationBarHidden(false, animated: true)
      
     }
     
-    override func viewDidAppear(_ animated: Bool) {
+    open override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         addKeyboardListeners()
         messagesCollectionView.scrollToLastItem()
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
+    open override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
       //  IQKeyboardManager.shared.enable = true
        // self.navigationController?.setNavigationBarHidden(true, animated: true)
@@ -165,7 +165,7 @@ class SingleChatViewController: MessagesViewController, IAlertHelper {
         fatalError()
     }
     
-    required init?(coder: NSCoder) {
+    required public init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
@@ -432,20 +432,20 @@ extension SingleChatViewController: MessagesDataSource, MessagesLayoutDelegate, 
         return messageSender.senderId == currentSender().senderId
     }
     
-    func currentSender() -> SenderType {
+    public func currentSender() -> SenderType {
         return sender
     }
     
-    func messageForItem(at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> MessageType {
+    public func messageForItem(at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> MessageType {
         let message = messages[indexPath.section]
         return message
     }
     
-    func numberOfSections(in messagesCollectionView: MessagesCollectionView) -> Int {
+    public func numberOfSections(in messagesCollectionView: MessagesCollectionView) -> Int {
         return messages.count
     }
     
-    func messageTopLabelAttributedText(for message: MessageType, at indexPath: IndexPath) -> NSAttributedString? {
+    public func messageTopLabelAttributedText(for message: MessageType, at indexPath: IndexPath) -> NSAttributedString? {
         guard let message = message as? ChatMessage else {
             assertionFailure()
             return nil
@@ -467,16 +467,16 @@ extension SingleChatViewController: MessagesDataSource, MessagesLayoutDelegate, 
         return attrString
     }
     
-    func messageTopLabelHeight(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> CGFloat {
+    public func messageTopLabelHeight(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> CGFloat {
         guard !shouldHideTimeAndSender(at: indexPath) else { return 0 }
         return 15
     }
     
-    func backgroundColor(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> UIColor {
+    public func backgroundColor(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> UIColor {
         return .clear
     }
     
-    func configureAvatarView(_ avatarView: AvatarView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
+    public func configureAvatarView(_ avatarView: AvatarView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
         
         avatarView.image = nil
         guard shouldShowAvatar(at: indexPath) else {
@@ -611,7 +611,7 @@ extension SingleChatViewController {
 // MARK: - InputBarAccessoryViewDelegate
 
 extension SingleChatViewController: InputBarAccessoryViewDelegate {
-    func inputBar(_ inputBar: InputBarAccessoryView, didPressSendButtonWith text: String) {
+    public func inputBar(_ inputBar: InputBarAccessoryView, didPressSendButtonWith text: String) {
         let components = inputBar.inputTextView.components
         inputBar.inputTextView.text = String()
         inputBar.invalidatePlugins()
@@ -655,7 +655,7 @@ extension SingleChatViewController: InputBarAccessoryViewDelegate {
         self.messagesCollectionView.scrollToLastItem(animated: true)
     }
     
-    func inputBar(_ inputBar: InputBarAccessoryView, textViewTextDidChangeTo text: String) {
+    public func inputBar(_ inputBar: InputBarAccessoryView, textViewTextDidChangeTo text: String) {
         let currentText = inputBar.inputTextView.text
         sendCmdMessage(action: .typing)
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 4) { [weak self] in
@@ -695,7 +695,7 @@ extension SingleChatViewController: SlackInputBarAccessoryViewDelegate {
 
 // MARK: - GiphyDelegate
 extension SingleChatViewController: GiphyDelegate {
-    func didSelectMedia(giphyViewController: GiphyViewController, media: GPHMedia) {
+    public func didSelectMedia(giphyViewController: GiphyViewController, media: GPHMedia) {
         
         let gifURL = media.url(rendition: .fixedWidth, fileType: .gif)
         let gifExtension = GifAttachment(gifUrl: gifURL?.description ?? "-",
@@ -732,7 +732,7 @@ extension SingleChatViewController: GiphyDelegate {
         }
     }
    
-   func didDismiss(controller: GiphyViewController?) {
+    public func didDismiss(controller: GiphyViewController?) {
         // your user dismissed the controller without selecting a GIF.
    }
 
@@ -740,7 +740,7 @@ extension SingleChatViewController: GiphyDelegate {
 
 // MARK: - AgoraRtmChannelDelegate
 extension SingleChatViewController: AgoraChatManagerDelegate {
-    func messagesDidReceive(_ aMessages: [AgoraChatMessage]) {
+    public func messagesDidReceive(_ aMessages: [AgoraChatMessage]) {
         let messageKitMessages = aMessages.compactMap { msg -> ChatMessage? in
             if let text = (msg.body as? AgoraChatTextMessageBody)?.text,
                let messageData = text.data(using: .utf8) {
@@ -765,7 +765,7 @@ extension SingleChatViewController: AgoraChatManagerDelegate {
         insert(newMessages: messageKitMessages)
     }
     
-    func cmdMessagesDidReceive(_ aCmdMessages: [AgoraChatMessage]) {
+    public func cmdMessagesDidReceive(_ aCmdMessages: [AgoraChatMessage]) {
         guard let message = aCmdMessages.first, let body = message.body as? AgoraChatCmdMessageBody else { return }
         let action = CmdMessageAction(rawValue: body.action)
         
@@ -810,7 +810,7 @@ private extension SingleChatViewController {
 // MARK: - Image Picker Delegate
 
 extension SingleChatViewController: ImagePickerDelegate {
-    func didSelect(image: UIImage?) {
+    public func didSelect(image: UIImage?) {
         ProgressHUD.show()
         guard let agoraMessage = AgoraSDKHelper.initImageMessage(image, to: chatId, chatType: .chat, messageExt: nil) else { return }
         AgoraChatClient.shared().chatManager.send(agoraMessage, progress: {_ in }) { [weak self] message, error in
@@ -828,7 +828,7 @@ extension SingleChatViewController: ImagePickerDelegate {
         }
     }
     
-    func didSelectVideo(with url: URL?) {
+    public func didSelectVideo(with url: URL?) {
         ProgressHUD.show()
         guard let agoraMessage = AgoraSDKHelper.initVideoMessage(url, to: chatId, chatType: .chat, messageExt: nil) else { return }
         AgoraChatClient.shared().chatManager.send(agoraMessage, progress: {value in
@@ -851,7 +851,7 @@ extension SingleChatViewController: ImagePickerDelegate {
 }
 
 extension SingleChatViewController: MessageCellDelegate {
-    func didTapImage(in cell: MessageCollectionViewCell) {
+    public func didTapImage(in cell: MessageCollectionViewCell) {
                 if let indexPath = messagesCollectionView.indexPath(for: cell) {
             let message = messages[indexPath.section]
             switch message.kind {
@@ -877,22 +877,22 @@ extension SingleChatViewController: MessageCellDelegate {
 
 extension SingleChatViewController: ReactionButtonDataSource {
     
-    func numberOfOptions(in selector: ReactionButton) -> Int {
+    public func numberOfOptions(in selector: ReactionButton) -> Int {
         ChatReactionManager.shared.reactionsDataset.count
     }
     
-    func ReactionSelector(_ selector: ReactionButton, viewForIndex index: Int) -> UIView {
+    public func ReactionSelector(_ selector: ReactionButton, viewForIndex index: Int) -> UIView {
         return UIImageView(image: ChatReactionManager.shared.reactionsDataset[index].imageName.textToImage())
     }
     
-    func ReactionSelector(_ selector: ReactionButton, nameForIndex index: Int) -> String {
+    public func ReactionSelector(_ selector: ReactionButton, nameForIndex index: Int) -> String {
         return ""
     }
     
 }
 
 extension SingleChatViewController: ReactionButtonDelegate {
-    func ReactionSelector(_ sender: ReactionButton, didSelectedIndex index: Int) {
+    public func ReactionSelector(_ sender: ReactionButton, didSelectedIndex index: Int) {
         print(sender.layer.name ?? "")
         ChatReactionManager.shared.sendReaction(with: index, to: sender.layer.name ?? "") { isAdded in
             self.sendCmdMessage(action: .updatedReaction)
