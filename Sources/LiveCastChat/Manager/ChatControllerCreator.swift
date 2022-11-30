@@ -8,7 +8,7 @@
 import Foundation
 
 open class ChatControllerCreator {
-    func chatListController() -> ChatListViewController {
+    public static func chatListController() -> ChatListViewController {
         return ChatListViewController.instantiate(from: .chat)
     }
 }
