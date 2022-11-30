@@ -21,7 +21,7 @@ public struct ChatMessage: Codable, Equatable {
     public var messageId: String = ""
     public var sentDate: Date = Date()
     public var kind: MessageKind = .attributedText(NSAttributedString(string: ""))
-    var text: String = ""
+    public var text: String = ""
     var gifExtension: GifAttachment?
     
     // MARK: Private Variable
