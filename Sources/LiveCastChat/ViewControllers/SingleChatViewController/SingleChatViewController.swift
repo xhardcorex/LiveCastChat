@@ -101,7 +101,6 @@ open class SingleChatViewController: MessagesViewController, IAlertHelper {
         let avatarURLString = ""
         let avatarURL = URL(string: avatarURLString)
         let output = ChatMessageSender(senderId: "", displayName: "Me", profileImageURL: avatarURL)
-
         return output
     }()
     
