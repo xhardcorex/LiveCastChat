@@ -74,8 +74,8 @@ open class ChatViewController: MessagesViewController, IAlertHelper {
     private var room: AgoraChatroom?
     private var chatInitError: CustomError?
     
-    var audioRoom: Room?
-    weak var delegate: ChatViewControllerDelegate?
+    public var audioRoom: Room?
+    public weak var delegate: ChatViewControllerDelegate?
 
     private lazy var sender: ChatMessageSender = {
 //        let avatarURLString = UserManager.user.currentUser?.avatar?.presignedUrl ?? ""
@@ -188,7 +188,7 @@ open class ChatViewController: MessagesViewController, IAlertHelper {
     
     // MARK: Function
     
-    func removeChatObservers() {
+    public func removeChatObservers() {
         AgoraChatClient.shared().roomManager.remove(self)
         AgoraChatClient.shared().chatManager.remove(self)
     }

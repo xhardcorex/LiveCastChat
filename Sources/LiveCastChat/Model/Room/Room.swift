@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Room: Codable {
+open class Room: Codable {
     
     var id: Int
     var name: String
@@ -30,7 +30,7 @@ class Room: Codable {
         self.recordings = recordings
     }
     
-    required init(from decoder: Decoder) throws {
+    required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         id = try container.decode(Int.self, forKey: .id)
         name = try container.decode(String.self, forKey: .name)
@@ -42,7 +42,7 @@ class Room: Codable {
         recordings = try container.decodeIfPresent([Recording].self, forKey: .recordings) ?? []
     }
     
-    func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(id, forKey: .id)
         try container.encode(name, forKey: .name)

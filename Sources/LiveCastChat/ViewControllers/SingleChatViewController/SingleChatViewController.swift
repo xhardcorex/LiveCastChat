@@ -227,7 +227,7 @@ open class SingleChatViewController: MessagesViewController, IAlertHelper {
     
     // MARK: Function
     
-    func removeChatObservers() {
+    public func removeChatObservers() {
         AgoraChatClient.shared().chatManager.remove(self)
     }
     
