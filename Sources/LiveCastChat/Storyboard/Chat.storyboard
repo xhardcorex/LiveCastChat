@@ -14,7 +14,7 @@
         <!--Chat Members View Controller-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
-                <viewController storyboardIdentifier="ChatMembersViewController" id="Y6W-OH-hqX" customClass="ChatMembersViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ChatMembersViewController" id="Y6W-OH-hqX" customClass="ChatMembersViewController" customModule="LiveCastChat" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -111,7 +111,7 @@
         <!--Chat List View Controller-->
         <scene sceneID="t19-9y-ece">
             <objects>
-                <viewController storyboardIdentifier="ChatListViewController" id="TVp-82-VSS" customClass="ChatListViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ChatListViewController" id="TVp-82-VSS" customClass="ChatListViewController" customModule="LiveCastChat" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zB0-u6-fbP">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
