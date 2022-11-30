@@ -83,7 +83,7 @@ open class TextMessageCell: MessageContentCell {
             case .text(let text), .emoji(let text):
                 let textColor = displayDelegate.textColor(for: message, at: indexPath, in: messagesCollectionView)
                 messageLabel.text = text
-                messageLabel.textColor = .red//textColor
+                messageLabel.textColor = textColor
                 if let font = messageLabel.messageLabelFont {
                     messageLabel.font = font
                 }
