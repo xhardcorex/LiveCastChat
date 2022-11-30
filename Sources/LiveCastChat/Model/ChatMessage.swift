@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ChatMessage: Codable, Equatable {
+public struct ChatMessage: Codable, Equatable {
     enum CodingKeys: String, CodingKey {
         case sender, messageId, sentDate, kind, text, gifUrl, gifWidth, gifHeight
     }
@@ -47,7 +47,7 @@ struct ChatMessage: Codable, Equatable {
         self.sender = sender
     }
     
-    init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         do {
             let container = try decoder.container(keyedBy: CodingKeys.self)
             self.sender = try container.decode(ChatMessageSender.self, forKey: .sender)
@@ -94,7 +94,7 @@ struct ChatMessage: Codable, Equatable {
         }
     }
     
-    func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         
         if let messageSender = sender as? ChatMessageSender {
@@ -121,14 +121,7 @@ struct ChatMessage: Codable, Equatable {
         }
     }
     
-    static func == (lhs: ChatMessage, rhs: ChatMessage) -> Bool {
+    public static func == (lhs: ChatMessage, rhs: ChatMessage) -> Bool {
         return lhs.messageId == rhs.messageId
     }
-    
-    // MARK: Private Function
-}
-
-// MARK: - MessageType
-extension ChatMessage: MessageType {
-
 }
