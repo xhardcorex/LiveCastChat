@@ -23,12 +23,13 @@ open class SingleChatViewController: MessagesViewController, IAlertHelper {
     
     private lazy var lazyMessagesCollectionView: MessagesCollectionView = {
         messagesCollectionView = MessagesCollectionView(frame: .zero, collectionViewLayout: CustomMessagesFlowLayout())
+        messagesCollectionView.register(ChatTextMessageCell.self)
+        messagesCollectionView.register(TextMessageCell.self)
+        messagesCollectionView.register(ChatMediaMessageCell.self)
+        messagesCollectionView.register(GifMessageCell.self)
         messagesCollectionView.messagesDataSource = self
         messagesCollectionView.messagesLayoutDelegate = self
         messagesCollectionView.messagesDisplayDelegate = self
-        messagesCollectionView.register(ChatTextMessageCell.self)
-        messagesCollectionView.register(ChatMediaMessageCell.self)
-        messagesCollectionView.register(GifMessageCell.self)
         return messagesCollectionView
     }()
     
@@ -244,7 +245,7 @@ open class SingleChatViewController: MessagesViewController, IAlertHelper {
         let message = messagesDataSource.messageForItem(at: indexPath, in: messagesCollectionView)
         switch message.kind {
         case .attributedText:
-            let cell = messagesCollectionView.dequeueReusableCell(ChatTextMessageCell.self, for: indexPath)
+            let cell = messagesCollectionView.dequeueReusableCell(TextMessageCell.self, for: indexPath)
             cell.configure(with: message, at: indexPath, and: messagesCollectionView)
             cell.addReactions(reactions: ChatReactionManager.shared.reactionsFor(messageId: message.messageId), isMe: isMe(at: indexPath))
             let buttonSample = ReactionButton(frame: cell.contentView.frame)
@@ -254,7 +255,7 @@ open class SingleChatViewController: MessagesViewController, IAlertHelper {
             cell.contentView.addSubview(buttonSample)
             return cell
         case .text:
-            let cell = messagesCollectionView.dequeueReusableCell(ChatTextMessageCell.self, for: indexPath)
+            let cell = messagesCollectionView.dequeueReusableCell(TextMessageCell.self, for: indexPath)
             cell.configure(with: message, at: indexPath, and: messagesCollectionView)
             cell.addReactions(reactions: ChatReactionManager.shared.reactionsFor(messageId: message.messageId), isMe: isMe(at: indexPath))
             let buttonSample = ReactionButton(frame: cell.contentView.frame)
