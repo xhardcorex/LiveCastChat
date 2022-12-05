@@ -8,14 +8,12 @@
 import Foundation
 import AgoraChat
 
-class ChatUserManager {
+open class ChatUserManager {
     
-    static let shared = ChatUserManager()
+    public static let shared = ChatUserManager()
 
-    func updateCurrentUserAvatar() {
-        //FIXME: Add avatar
-//        guard let urlString = UserManager.user.currentUser?.avatar?.presignedUrl else { return }
-        AgoraChatClient.shared().userInfoManager.updateOwnUserInfo("", with: .avatarURL)
+    public func updateCurrentUserAvatar(with url: String) {
+        AgoraChatClient.shared().userInfoManager.updateOwnUserInfo(url, with: .avatarURL)
     }
     
 }
