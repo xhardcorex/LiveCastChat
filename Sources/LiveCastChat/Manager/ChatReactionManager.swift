@@ -12,7 +12,7 @@ open class ChatReactionManager {
   
     public static let shared = ChatReactionManager()
     
-    let reactionsDataset = [
+    public let reactionsDataset = [
           (imageName: "👍", reaction: "thumbs up"),
           (imageName: "👎", reaction: "thumbs down"),
           (imageName: "❤️", reaction: "red heart"),

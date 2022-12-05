@@ -7,7 +7,7 @@
 
 import UIKit
 
-extension String {
+public extension String {
     func textToImage() -> UIImage {
         let nsString = (self as NSString)
         let font = UIFont.systemFont(ofSize: 1024)
