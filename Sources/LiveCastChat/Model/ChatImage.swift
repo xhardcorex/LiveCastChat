@@ -7,16 +7,16 @@
 
 import UIKit
 
-class ChatImage: MediaItem {
-    var url: URL?
+open class ChatImage: MediaItem {
+    public var url: URL?
     
-    var image: UIImage?
+    public var image: UIImage?
     
-    var placeholderImage: UIImage
+    public var placeholderImage: UIImage
     
-    var size: CGSize
+    public var size: CGSize
     
-    init(url: URL?, size: CGSize) {
+    public init(url: URL?, size: CGSize) {
         self.url = url
         self.size = size
         self.placeholderImage = UIImage(named: "mediaPlaceholder") ?? UIImage()

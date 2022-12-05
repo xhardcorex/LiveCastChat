@@ -7,7 +7,7 @@
 import Foundation
 import AgoraChat
 
-extension AgoraChatMessage {
+public extension AgoraChatMessage {
     func messageText() -> String? {
         if let messageData = (self.body as? AgoraChatTextMessageBody)?.text.data(using: .utf8) {
             let messageObject =  try? JSONDecoder().decode(ChatMessage.self, from: messageData)

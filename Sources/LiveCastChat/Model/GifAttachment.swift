@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct GifAttachment: Codable, Equatable {
+public struct GifAttachment: Codable, Equatable {
     
     enum CodingKeys: String, CodingKey {
         case gifUrl, gifWidth, gifHeight
@@ -23,7 +23,7 @@ struct GifAttachment: Codable, Equatable {
         self.gifHeight = gifHeight
     }
     
-    init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         do {
             let container = try decoder.container(keyedBy: CodingKeys.self)
             self.gifUrl = try container.decode(String.self, forKey: .gifUrl)
