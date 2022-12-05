@@ -9,17 +9,17 @@ import Foundation
 import AgoraChat
 import AVFoundation
 
-enum CmdMessageAction: String {
+public enum CmdMessageAction: String {
     case typing = "MSG_TYPING_BEGIN"
     case stop = "MSG_TYPING_END"
     case updatedReaction = "MSG_UPDATED_REACTION"
 }
 
-class AgoraSDKHelper {
+open class AgoraSDKHelper {
     
     private init() {}
 
-    class func initMessage(_ text: String?,
+    public class func initMessage(_ text: String?,
                          to receiver: String?,
                          chatType: AgoraChatType,
                           messageExt: [AnyHashable : Any]?) -> AgoraChatMessage? {
@@ -35,7 +35,7 @@ class AgoraSDKHelper {
         return message
     }
     
-    class func initImageMessage(_ image: UIImage?,
+    public class func initImageMessage(_ image: UIImage?,
                               to receiver: String?,
                               chatType: AgoraChatType,
                               messageExt: [AnyHashable : Any]?) -> AgoraChatMessage? {
@@ -53,7 +53,7 @@ class AgoraSDKHelper {
         return message
     }
     
-    class func initVideoMessage(_ url: URL?,
+    public class func initVideoMessage(_ url: URL?,
                               to receiver: String?,
                               chatType: AgoraChatType,
                               messageExt: [AnyHashable : Any]?) -> AgoraChatMessage? {
@@ -74,7 +74,7 @@ class AgoraSDKHelper {
 
     }
     
-    class func initCmdMessage(_ text: String?,
+    public class func initCmdMessage(_ text: String?,
                          to receiver: String?,
                          chatType: AgoraChatType,
                          action: CmdMessageAction,

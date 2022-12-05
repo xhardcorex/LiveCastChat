@@ -10,7 +10,7 @@ import AgoraChat
 
 open class ChatReactionManager {
   
-    static let shared = ChatReactionManager()
+    public static let shared = ChatReactionManager()
     
     let reactionsDataset = [
           (imageName: "👍", reaction: "thumbs up"),

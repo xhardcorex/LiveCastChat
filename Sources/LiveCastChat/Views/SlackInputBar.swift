@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol SlackInputBarAccessoryViewDelegate : InputBarAccessoryViewDelegate, UIViewController {
+public protocol SlackInputBarAccessoryViewDelegate : InputBarAccessoryViewDelegate, UIViewController {
     func didPressCameraButtonWith(_ inputBar: InputBarAccessoryView)
     func didPressMediaButtonWith(_ inputBar: InputBarAccessoryView)
     func didPressGifButtonWith(_ inputBar: InputBarAccessoryView)
