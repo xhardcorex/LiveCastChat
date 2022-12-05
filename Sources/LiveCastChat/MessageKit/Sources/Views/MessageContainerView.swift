@@ -45,7 +45,7 @@ open class MessageContainerView: UIImageView {
     // MARK: - Methods
 
     private func sizeMaskToView() {
-        break
+      //  break
 //        switch style {
 //        case .none, .custom:
 //            break
