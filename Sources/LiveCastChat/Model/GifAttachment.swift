@@ -17,7 +17,7 @@ public struct GifAttachment: Codable, Equatable {
     var gifWidth = 0
     var gifHeight = 0
     
-    init(gifUrl: String, gifWidth: Int, gifHeight: Int) {
+    public init(gifUrl: String, gifWidth: Int, gifHeight: Int) {
         self.gifUrl = gifUrl
         self.gifWidth = gifWidth
         self.gifHeight = gifHeight

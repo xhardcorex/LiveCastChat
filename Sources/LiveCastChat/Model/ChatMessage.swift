@@ -27,7 +27,7 @@ public struct ChatMessage: Codable, Equatable {
     // MARK: Private Variable
     
     // MARK: Init
-    init(sender: SenderType,
+    public init(sender: SenderType,
          messageId: String = "",
          sentDate: Date = Date(),
          kind: MessageKind,
@@ -41,7 +41,7 @@ public struct ChatMessage: Codable, Equatable {
         self.gifExtension = gifExtension
     }
     
-    init(with messageId: String, kind: MessageKind, sender: SenderType) {
+    public init(with messageId: String, kind: MessageKind, sender: SenderType) {
         self.messageId = messageId
         self.kind = kind
         self.sender = sender

@@ -19,8 +19,8 @@ open class ChatMessageSender: NSObject, Codable {
     // MARK: Variable
     public var senderId: String
     public var displayName: String
-    var profileImageURL: URL?
-    var initials: String
+    public var profileImageURL: URL?
+    public var initials: String
     
     private (set)var avatar: Avatar? = nil
     
