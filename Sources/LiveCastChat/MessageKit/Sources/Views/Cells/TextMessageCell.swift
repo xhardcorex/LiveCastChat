@@ -39,7 +39,7 @@ open class TextMessageCell: MessageContentCell {
     /// The label used to display the message's text.
     open var messageLabel = MessageLabel()
 
-    var reactionsLabel: UILabel?
+    //var reactionsLabel: UILabel?
     
     // MARK: - Methods
 
@@ -96,22 +96,22 @@ open class TextMessageCell: MessageContentCell {
     }
     
     func addReactions(reactions: [String], isMe: Bool) {
-        reactionsLabel?.removeFromSuperview()        
-        let reactionWidth = (20 * CGFloat(reactions.count))
-        let xPosition = isMe ? contentView.frame.maxX - reactionWidth - avatarView.frame.width : contentView.frame.minX + avatarView.frame.width
-        reactionsLabel = UILabel(frame: CGRect(xPosition, contentView.frame.maxY - 10, reactionWidth, 20))
-        reactionsLabel?.textAlignment = .center
-        reactionsLabel?.font = UIFont.systemFont(ofSize: 10)
-        reactionsLabel?.backgroundColor = .clear
-        reactionsLabel?.layer.cornerRadius = 6
-        reactionsLabel?.layer.masksToBounds = true
-
-        var string = ""
-        for reaction in reactions {
+//        reactionsLabel?.removeFromSuperview()
+//        let reactionWidth = (20 * CGFloat(reactions.count))
+//        let xPosition = isMe ? contentView.frame.maxX - reactionWidth - avatarView.frame.width : contentView.frame.minX + avatarView.frame.width
+//        reactionsLabel = UILabel(frame: CGRect(xPosition, contentView.frame.maxY - 10, reactionWidth, 20))
+//        reactionsLabel?.textAlignment = .center
+//        reactionsLabel?.font = UIFont.systemFont(ofSize: 10)
+//        reactionsLabel?.backgroundColor = .clear
+//        reactionsLabel?.layer.cornerRadius = 6
+//        reactionsLabel?.layer.masksToBounds = true
+//
+//        var string = ""
+//        for reaction in reactions {
 //            string.append(ChatReactionManager.shared.reactionsDataset.first(where: { $0.reaction == reaction })?.imageName ?? "-")
-        }
-        reactionsLabel?.text = string
-        contentView.addSubview(reactionsLabel!)
+ //       }
+//        reactionsLabel?.text = string
+//        contentView.addSubview(reactionsLabel!)
     }
     
     /// Used to handle the cell's contentView's tap gesture.
