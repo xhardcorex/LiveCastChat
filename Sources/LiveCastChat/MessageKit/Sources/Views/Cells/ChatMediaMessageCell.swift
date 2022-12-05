@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ChatMediaMessageCell: MediaMessageCell {
+open class ChatMediaMessageCell: MediaMessageCell {
     
     open override func configure(with message: MessageType, at indexPath: IndexPath, and messagesCollectionView: MessagesCollectionView) {
         super.configure(with: message, at: indexPath, and: messagesCollectionView)

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ChatTextMessageCell: TextMessageCell {
+open class ChatTextMessageCell: TextMessageCell {
     
     open override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
         super.apply(layoutAttributes)

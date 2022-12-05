@@ -6,13 +6,13 @@ import ReactionButton
 
 // MARK: - Callbacks
 
-typealias FollowAction  = ((() -> Void) -> Void)?
-typealias ReturnAction  = () -> Void
-typealias ReturnString  = (String) -> Void
-typealias ReturnInteger = (Int) -> Void
-typealias ReturnFlag    = (Bool) -> Void
-typealias ReturnDate    = (Date) -> Void
-typealias ReturnFloat    = (Float) -> Void
+public typealias FollowAction  = ((() -> Void) -> Void)?
+public typealias ReturnAction  = () -> Void
+public typealias ReturnString  = (String) -> Void
+public typealias ReturnInteger = (Int) -> Void
+public typealias ReturnFlag    = (Bool) -> Void
+public typealias ReturnDate    = (Date) -> Void
+public typealias ReturnFloat    = (Float) -> Void
 
 
 public struct LiveCastChat {

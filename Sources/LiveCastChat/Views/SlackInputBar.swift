@@ -15,14 +15,14 @@ protocol SlackInputBarAccessoryViewDelegate : InputBarAccessoryViewDelegate, UIV
 }
 
 
-final class SlackInputBar: InputBarAccessoryView {
+open class SlackInputBar: InputBarAccessoryView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     

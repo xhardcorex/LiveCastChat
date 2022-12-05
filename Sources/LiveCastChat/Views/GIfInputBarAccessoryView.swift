@@ -7,27 +7,27 @@
 
 import UIKit
 
-protocol GIfInputBarAccessoryViewDelegate : InputBarAccessoryViewDelegate, UIViewController {
+public protocol GIfInputBarAccessoryViewDelegate : InputBarAccessoryViewDelegate, UIViewController {
     func inputBar(_ inputBar: InputBarAccessoryView, didPressSendButtonWith attachments: [AttachmentManager.Attachment])
     func inputBar(_ inputBar: InputBarAccessoryView, didPressMoreButtonWith attachments: [AttachmentManager.Attachment])
     func inputBar(_ inputBar: InputBarAccessoryView, didPressGifButtonWith attachments: [AttachmentManager.Attachment])
 }
 
-extension GIfInputBarAccessoryViewDelegate {
+public extension GIfInputBarAccessoryViewDelegate {
     func inputBar(_ inputBar: InputBarAccessoryView, didPressSendButtonWith attachments: [AttachmentManager.Attachment]) {
         
     }
 }
 
 
-class GIfInputBarAccessoryView: InputBarAccessoryView {
+open class GIfInputBarAccessoryView: InputBarAccessoryView {
     // MARK: Constant
     
     // MARK: Private Constant
     private let defaultAnimationDuration: TimeInterval = 0.15
     
     // MARK: Variable
-    override var middleContentViewPadding: UIEdgeInsets {
+    open override var middleContentViewPadding: UIEdgeInsets {
         get {
             return lazyMiddleContentViewPadding
         }
@@ -36,7 +36,7 @@ class GIfInputBarAccessoryView: InputBarAccessoryView {
         }
     }
     
-    override var shouldManageSendButtonEnabledState: Bool {
+    open override var shouldManageSendButtonEnabledState: Bool {
         get {
             return false
         }
@@ -121,7 +121,7 @@ class GIfInputBarAccessoryView: InputBarAccessoryView {
         configureUI()
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
@@ -133,7 +133,7 @@ class GIfInputBarAccessoryView: InputBarAccessoryView {
     }
     
     // MARK: Function
-    override func didSelectSendButton() {
+    open override func didSelectSendButton() {
         if shouldCallMoreEventInsteadOfSend {
             (delegate as? GIfInputBarAccessoryViewDelegate)?.inputBar(self, didPressMoreButtonWith: attachmentManager.attachments)
         } else {
@@ -230,7 +230,7 @@ extension GIfInputBarAccessoryView : UIImagePickerControllerDelegate , UINavigat
         
     }
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
         if let editedImage = info[  UIImagePickerController.InfoKey.editedImage] as? UIImage {
             // self.sendImageMessage(photo: editedImage)
@@ -248,7 +248,7 @@ extension GIfInputBarAccessoryView : UIImagePickerControllerDelegate , UINavigat
     }
     
     
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+    public func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         getViewController()?.dismiss(animated: true, completion: nil)
         inputAccessoryView?.isHidden = false
     }
@@ -263,19 +263,19 @@ extension GIfInputBarAccessoryView : UIImagePickerControllerDelegate , UINavigat
 extension GIfInputBarAccessoryView: AttachmentManagerDelegate {
     // MARK: - AttachmentManagerDelegate
     
-    func attachmentManager(_ manager: AttachmentManager, shouldBecomeVisible: Bool) {
+    public func attachmentManager(_ manager: AttachmentManager, shouldBecomeVisible: Bool) {
         setAttachmentManager(active: shouldBecomeVisible)
     }
     
-    func attachmentManager(_ manager: AttachmentManager, didReloadTo attachments: [AttachmentManager.Attachment]) {
+    public func attachmentManager(_ manager: AttachmentManager, didReloadTo attachments: [AttachmentManager.Attachment]) {
         self.shouldCallMoreEventInsteadOfSend = !(manager.attachments.count > 0)
     }
     
-    func attachmentManager(_ manager: AttachmentManager, didInsert attachment: AttachmentManager.Attachment, at index: Int) {
+    public func attachmentManager(_ manager: AttachmentManager, didInsert attachment: AttachmentManager.Attachment, at index: Int) {
         self.shouldCallMoreEventInsteadOfSend = !(manager.attachments.count > 0)
     }
     
-    func attachmentManager(_ manager: AttachmentManager, didRemove attachment: AttachmentManager.Attachment, at index: Int) {
+    public func attachmentManager(_ manager: AttachmentManager, didRemove attachment: AttachmentManager.Attachment, at index: Int) {
         self.shouldCallMoreEventInsteadOfSend = !(manager.attachments.count > 0)
     }
     

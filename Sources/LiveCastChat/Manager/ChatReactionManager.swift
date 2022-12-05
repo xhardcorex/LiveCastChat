@@ -8,7 +8,7 @@
 import Foundation
 import AgoraChat
 
-class ChatReactionManager {
+open class ChatReactionManager {
   
     static let shared = ChatReactionManager()
     
@@ -24,11 +24,11 @@ class ChatReactionManager {
 
     var reactions: [String : [AgoraChatMessageReaction]]?
 
-    func reactionsFor(messageId: String) -> [String] {
+    public func reactionsFor(messageId: String) -> [String] {
         return reactions?.first(where: { $0.key == messageId })?.value.compactMap({ $0.reaction }).sorted(by: { $0 > $1 }) ?? []
     }
 
-    func sendReaction(with index: Int, to messageId: String, completion: @escaping ReturnFlag) {
+    public func sendReaction(with index: Int, to messageId: String, completion: @escaping ReturnFlag) {
         if self.reactions?[messageId]?.first(where: { $0.reaction == reactionsDataset[index].reaction }) == nil {
             add(with: index, to: messageId) {
                 completion(true)
@@ -40,7 +40,7 @@ class ChatReactionManager {
         }
     }
 
-    func add(with index: Int, to messageId: String, completion: @escaping ReturnAction) {
+    public func add(with index: Int, to messageId: String, completion: @escaping ReturnAction) {
         AgoraChatClient.shared().chatManager.addReaction(reactionsDataset[index].reaction, toMessage: messageId, completion: { error in
             if let error = error {
                 print(error.errorDescription!)
@@ -49,7 +49,7 @@ class ChatReactionManager {
         })
     }
 
-    func remove(with index: Int, to messageId: String, completion: @escaping ReturnAction) {
+    public func remove(with index: Int, to messageId: String, completion: @escaping ReturnAction) {
         AgoraChatClient.shared().chatManager.removeReaction(reactionsDataset[index].reaction, fromMessage: messageId, completion: { error in
             if let error = error {
                 print(error.errorDescription!)
@@ -58,7 +58,7 @@ class ChatReactionManager {
         })
     }
 
-    func fetchReactions(messageIds: [String], completion: @escaping ReturnAction) {
+    public func fetchReactions(messageIds: [String], completion: @escaping ReturnAction) {
         AgoraChatClient.shared().chatManager.getReactionList(messageIds, groupId: nil, chatType: .chat, completion: { reactions, error in
             if error == nil {
                 self.reactions = reactions
@@ -69,7 +69,7 @@ class ChatReactionManager {
         })
     }
 
-    func fetchReactionDetails(messageId: String, reaction: String) {
+    public func fetchReactionDetails(messageId: String, reaction: String) {
         AgoraChatClient.shared().chatManager.getReactionDetail(messageId, reaction: reaction, cursor: nil, pageSize: 30, completion: { agoraReaction, value, error in
             if let error = error {
                 print(error)

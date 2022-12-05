@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ChatMessageSender: NSObject, Codable {
+open class ChatMessageSender: NSObject, Codable {
     enum CodingKeys: String, CodingKey {
         case senderId, displayName, profileImageURL, initials
     }
@@ -17,8 +17,8 @@ class ChatMessageSender: NSObject, Codable {
     // MARK: Private Constant
     
     // MARK: Variable
-    var senderId: String
-    var displayName: String
+    public var senderId: String
+    public var displayName: String
     var profileImageURL: URL?
     var initials: String
     
@@ -33,14 +33,14 @@ class ChatMessageSender: NSObject, Codable {
     ///   - displayName: Sender name
     ///   - initials: Sender`s initials`
     ///   - profileImageURL: Imape URL for sender`s profile picture`
-    init(senderId: String = "", displayName: String = "", initials: String = "", profileImageURL: URL? = nil) {
+    public init(senderId: String = "", displayName: String = "", initials: String = "", profileImageURL: URL? = nil) {
         self.senderId = senderId
         self.displayName = displayName
         self.profileImageURL = profileImageURL
         self.initials = initials
     }
     
-    required init(from decoder: Decoder) throws {
+    required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.senderId = try container.decode(String.self, forKey: .senderId)
         self.displayName = try container.decode(String.self, forKey: .displayName)
@@ -50,7 +50,7 @@ class ChatMessageSender: NSObject, Codable {
         self.initials = try container.decode(String.self, forKey: .initials)
     }
     
-    func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(senderId, forKey: .senderId)
         try container.encode(displayName, forKey: .displayName)
