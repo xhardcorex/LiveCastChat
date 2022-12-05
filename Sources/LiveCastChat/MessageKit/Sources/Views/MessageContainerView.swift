@@ -45,44 +45,49 @@ open class MessageContainerView: UIImageView {
     // MARK: - Methods
 
     private func sizeMaskToView() {
-        switch style {
-        case .none, .custom:
-            break
-        case .bubble, .bubbleTail, .bubbleOutline, .bubbleTailOutline:
-            imageMask.frame = bounds
-        }
+        break
+//        switch style {
+//        case .none, .custom:
+//            break
+//        case .bubble, .bubbleTail, .bubbleOutline, .bubbleTailOutline:
+//            imageMask.frame = bounds
+//        }
     }
 
     private func applyMessageStyle() {
-        switch style {
-        case .bubble, .bubbleTail:
-            imageMask.image = style.image
-            sizeMaskToView()
-            mask = imageMask
-            image = nil
-        case .bubbleOutline(let color):
-            let bubbleStyle: MessageStyle = .bubble
-            imageMask.image = bubbleStyle.image
-            sizeMaskToView()
-            mask = imageMask
-            image = style.image?.withRenderingMode(.alwaysTemplate)
-            tintColor = color
-        case .bubbleTailOutline(let color, let tail, let corner):
-            let bubbleStyle: MessageStyle = .bubbleTail(tail, corner)
-            imageMask.image = bubbleStyle.image
-            sizeMaskToView()
-            mask = imageMask
-            image = style.image?.withRenderingMode(.alwaysTemplate)
-            tintColor = color
-        case .none:
-            mask = nil
-            image = nil
-            tintColor = nil
-        case .custom(let configurationClosure):
-            mask = nil
-            image = nil
-            tintColor = nil
-            configurationClosure(self)
-        }
+        mask = nil
+        image = nil
+        tintColor = nil
+
+//        switch style {
+//        case .bubble, .bubbleTail:
+//            imageMask.image = style.image
+//            sizeMaskToView()
+//            mask = imageMask
+//            image = nil
+//        case .bubbleOutline(let color):
+//            let bubbleStyle: MessageStyle = .bubble
+//            imageMask.image = bubbleStyle.image
+//            sizeMaskToView()
+//            mask = imageMask
+//            image = style.image?.withRenderingMode(.alwaysTemplate)
+//            tintColor = color
+//        case .bubbleTailOutline(let color, let tail, let corner):
+//            let bubbleStyle: MessageStyle = .bubbleTail(tail, corner)
+//            imageMask.image = bubbleStyle.image
+//            sizeMaskToView()
+//            mask = imageMask
+//            image = style.image?.withRenderingMode(.alwaysTemplate)
+//            tintColor = color
+//        case .none:
+//            mask = nil
+//            image = nil
+//            tintColor = nil
+//        case .custom(let configurationClosure):
+//            mask = nil
+//            image = nil
+//            tintColor = nil
+//            configurationClosure(self)
+//        }
     }
 }
