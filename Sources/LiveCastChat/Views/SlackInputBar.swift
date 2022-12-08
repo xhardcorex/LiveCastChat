@@ -12,6 +12,7 @@ public protocol SlackInputBarAccessoryViewDelegate : InputBarAccessoryViewDelega
     func didPressCameraButtonWith(_ inputBar: InputBarAccessoryView)
     func didPressMediaButtonWith(_ inputBar: InputBarAccessoryView)
     func didPressGifButtonWith(_ inputBar: InputBarAccessoryView)
+    func didPressMicrophoneButtonWith(_ inputBar: InputBarAccessoryView)
 }
 
 
@@ -43,6 +44,10 @@ open class SlackInputBar: InputBarAccessoryView {
                 (self.delegate as? SlackInputBarAccessoryViewDelegate)?.didPressGifButtonWith(self)
             },
             .flexibleSpace,
+            makeButton(named: "microphone", isSystemImage: false).onSelected { _ in
+                //$0.tintColor = .systemBlue
+                (self.delegate as? SlackInputBarAccessoryViewDelegate)?.didPressMicrophoneButtonWith(self)
+            },
             sendButton
                 .configure {
                     $0.layer.cornerRadius = 8
