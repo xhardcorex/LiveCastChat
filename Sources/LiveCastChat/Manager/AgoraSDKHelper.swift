@@ -71,7 +71,27 @@ open class AgoraSDKHelper {
                                        ext: messageExt)
         message.chatType = chatType
         return message
-
+    }
+    
+    public class func initAudioMessage(_ url: URL?,
+                              to receiver: String?,
+                              chatType: AgoraChatType,
+                              messageExt: [AnyHashable : Any]?) -> AgoraChatMessage? {
+        
+        guard let url = url else { return nil}
+        let body = AgoraChatVoiceMessageBody(localPath: url.path, displayName: "audioMessage")
+        let asset = AVURLAsset(url: url)
+        let durationInSeconds = asset.duration.seconds
+        print(durationInSeconds)
+        body.duration = Int32(durationInSeconds)
+        let sender = AgoraChatClient.shared().currentUsername
+        let message = AgoraChatMessage(conversationID: receiver ?? "-",
+                                       from: sender ?? "-",
+                                       to: receiver ?? "-",
+                                       body: body,
+                                       ext: messageExt)
+        message.chatType = chatType
+        return message
     }
     
     public class func initCmdMessage(_ text: String?,
