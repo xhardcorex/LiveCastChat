@@ -31,8 +31,9 @@ open class AudioMessageCell: MessageContentCell {
     /// The play button view to display on audio messages.
     public lazy var playButton: UIButton = {
         let playButton = UIButton(type: .custom)
-        let playImage = UIImage.messageKitImageWith(type: .play)
-        let pauseImage = UIImage.messageKitImageWith(type: .pause)
+        let playImage = UIImage(named: ImageType.play.rawValue)
+        let pauseImage = UIImage(named: ImageType.pause.rawValue)
+//        let pauseImage = UIImage.messageKitImageWith(type: .pause)
         playButton.setImage(playImage?.withRenderingMode(.alwaysTemplate), for: .normal)
         playButton.setImage(pauseImage?.withRenderingMode(.alwaysTemplate), for: .selected)
         return playButton
