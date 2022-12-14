@@ -98,7 +98,12 @@ open class AudioMessageCell: MessageContentCell {
         let playButtonTouchArea = CGRect(playButton.frame.origin.x - 10.0, playButton.frame.origin.y - 10, playButton.frame.size.width + 20, playButton.frame.size.height + 20)
         let translateTouchLocation = convert(touchLocation, to: messageContainerView)
         if playButtonTouchArea.contains(translateTouchLocation) {
-            delegate?.didTapPlayButton(in: self)
+            if !playButton.isSelected {
+                delegate?.didTapPlayButton(in: self)
+            } else {
+                delegate?.didPauseAudio(in: self)
+            }
+            playButton.isSelected = !playButton.isSelected
         } else {
             super.handleTapGesture(gesture)
         }
