@@ -9,11 +9,8 @@ import UIKit
 
 open class ChatImage: MediaItem {
     public var url: URL?
-    
     public var image: UIImage?
-    
     public var placeholderImage: UIImage
-    
     public var size: CGSize
     
     public init(url: URL?, size: CGSize) {
