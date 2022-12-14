@@ -110,5 +110,27 @@ open class AgoraSDKHelper {
         return message
     }
     
+    func downloadSound(url: URL, completion: @escaping ((URL?) -> Void)) {
+        guard let docUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return }
+        let desURL = docUrl.appendingPathComponent("audiomessage.m4a")
+        var downloadTask:URLSessionDownloadTask
+            downloadTask = URLSession.shared.downloadTask(with: url, completionHandler: { (URLData, response, error) -> Void in
+                do {
+                    let isFileFound = FileManager.default.fileExists(atPath: desURL.path)
+                    if isFileFound == true {
+                        print(desURL) //delete tmpsong.m4a & copy
+                        try FileManager.default.removeItem(atPath: desURL.path)
+                        try FileManager.default.copyItem(at: URLData!, to: desURL)
+                    } else {
+                        try FileManager.default.copyItem(at: URLData!, to: desURL)
+                    }
+                    completion(desURL)
+                } catch let err {
+                    print(err.localizedDescription)
+                }
+            })
+            downloadTask.resume()
+    }
+    
 }
 
