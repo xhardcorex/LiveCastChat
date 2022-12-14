@@ -110,7 +110,7 @@ open class AgoraSDKHelper {
         return message
     }
     
-    func downloadSound(url: URL, completion: @escaping ((URL?) -> Void)) {
+    public class func downloadSound(url: URL, completion: @escaping ((URL?) -> Void)) {
         guard let docUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return }
         let desURL = docUrl.appendingPathComponent("audiomessage.m4a")
         var downloadTask:URLSessionDownloadTask
