@@ -54,12 +54,6 @@ open class AudioMessageCell: MessageContentCell {
         activityIndicatorView.isHidden = true
         return activityIndicatorView
     }()
-
-    public lazy var progressView: UIProgressView = {
-        let progressView = UIProgressView(progressViewStyle: .default)
-        progressView.progress = 0.0
-        return progressView
-    }()
     
     // MARK: - Methods
 
@@ -69,7 +63,6 @@ open class AudioMessageCell: MessageContentCell {
         playButton.addConstraints(left: messageContainerView.leftAnchor, centerY: messageContainerView.centerYAnchor, leftConstant: 5)
         activityIndicatorView.addConstraints(centerY: playButton.centerYAnchor, centerX: playButton.centerXAnchor)
         durationLabel.addConstraints(right: messageContainerView.rightAnchor, centerY: messageContainerView.centerYAnchor, rightConstant: 15)
-        progressView.addConstraints(left: playButton.rightAnchor, right: durationLabel.leftAnchor, centerY: messageContainerView.centerYAnchor, leftConstant: 5, rightConstant: 5)
     }
 
     open override func setupSubviews() {
@@ -77,13 +70,11 @@ open class AudioMessageCell: MessageContentCell {
         messageContainerView.addSubview(playButton)
         messageContainerView.addSubview(activityIndicatorView)
         messageContainerView.addSubview(durationLabel)
-        messageContainerView.addSubview(progressView)
         setupConstraints()
     }
 
     open override func prepareForReuse() {
         super.prepareForReuse()
-        progressView.progress = 0
         playButton.isSelected = false
         activityIndicatorView.stopAnimating()
         playButton.isHidden = false
@@ -136,7 +127,6 @@ open class AudioMessageCell: MessageContentCell {
         let tintColor = displayDelegate.audioTintColor(for: message, at: indexPath, in: messagesCollectionView)
         playButton.imageView?.tintColor = tintColor
         durationLabel.textColor = tintColor
-        progressView.tintColor = tintColor
         
         if case let .audio(audioItem) = message.kind {
             durationLabel.text = displayDelegate.audioProgressTextFormat(audioItem.duration, for: self, in: messagesCollectionView)
